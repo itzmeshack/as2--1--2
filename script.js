@@ -228,29 +228,23 @@ function StopkeyDown(event) {
 
 
 
-let enemy = document.querySelectorAll('.enemy');
+let enemy = document.querySelector('.enemy');
 function checkenemy(){
 
   if (isGameOver) return; // Don't move player if game over
-
+  const enemyPosition = enemy.getBoundingClientRect();
   const playerPosition = player.getBoundingClientRect();
 
-   // Iterate over each enemy
-   enemy.forEach(function(enemyElement) {
-    const enemyPosition = enemyElement.getBoundingClientRect();
-    
-    // Check for collision between player and current enemy
-    if (
-      playerPosition.right > enemyPosition.left &&
-      playerPosition.left < enemyPosition.right &&
-      playerPosition.bottom > enemyPosition.top &&
-      playerPosition.top < enemyPosition.bottom
-    ) {
-      gameOver();
-      document.addEventListener("keydown", StopkeyDown);
-      document.addEventListener("keyup", StopkeyUp);
-    }
-  });
+  if (playerPosition.right > enemyPosition.left &&
+    playerPosition.left < enemyPosition.right &&
+    playerPosition.bottom > enemyPosition.top &&
+    playerPosition.top < enemyPosition.bottom
+  ){
+    gameOver();
+
+    document.addEventListener("keydown", StopkeyDown);
+    document.addEventListener("keyup", StopkeyUp);
+  }
 
 
 
